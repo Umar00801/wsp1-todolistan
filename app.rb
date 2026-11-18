@@ -13,7 +13,13 @@ class App < Sinatra::Base
       return @db
     end
 
-    get '/' do        
+    get '/' do 
+        redirect('/todos')
+    end
+
+    get '/todos' do  
+        @todos = db.execute ('SELECT * FROM todos ORDER BY completed') 
+        ap @todos     
         erb(:'todos/index')
     end
 
